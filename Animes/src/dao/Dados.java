@@ -127,5 +127,57 @@ public class Dados {
         
         return animes;
     }
+    
+    public void editar(Anime a){
+        
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = con.prepareStatement("Update lista_anime Set nome = ?, genero = ?, nota = ?, classificacao = ?"
+                    + "Where nome = ?");
+            stmt.setString(1, a.getNome());
+            stmt.setString(2, a.getGenero());
+            stmt.setDouble(3, a.getNota());
+            stmt.setString(4, a.getClassficacao());
+            stmt.setString(5, a.getNome());
+            
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Editado com Sucesso!");
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Erro ao editar: "+ex);
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+        
+    }
+    
+    public List<Anime> seachEdit(String nome){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Anime> edit = new ArrayList<>();
+        
+        try {
+            stmt = con.prepareStatement("Select * From lista_anime Where nome Like ?");
+            stmt.setString(1, "%"+nome+"%");
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                Anime a = new Anime(); 
+                
+                a.setNome(rs.getString("NOME"));
+                a.setGenero(rs.getString("GENERO"));
+                a.setNota(rs.getDouble("NOTA"));
+                edit.add(a);
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Anime não encontrado!");
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return edit;
+    }
    
 }

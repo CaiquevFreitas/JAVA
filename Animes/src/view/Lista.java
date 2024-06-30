@@ -90,7 +90,7 @@ public class Lista extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(102, 204, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 102));
 
         txtTitulo2.setFont(new java.awt.Font("Goudy Stout", 0, 48)); // NOI18N
         txtTitulo2.setForeground(new java.awt.Color(255, 255, 255));
