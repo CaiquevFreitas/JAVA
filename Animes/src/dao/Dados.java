@@ -40,6 +40,7 @@ public class Dados {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
+        int count = 0;
         
         List<Anime> animes = new ArrayList<>();
         
@@ -49,14 +50,14 @@ public class Dados {
             
             while(rs.next()){
                 Anime a = new Anime();
-                 
+                 count++;
                 a.setNome(rs.getString("NOME"));
                 a.setGenero(rs.getString("GENERO"));
                 a.setNota(rs.getDouble("NOTA"));
                 a.setClassficacao(rs.getString("CLASSIFICACAO"));
                 animes.add(a);
             }
-            
+            JOptionPane.showMessageDialog(null, "Foram encontrados "+count+" Animes");
         } catch (SQLException ex) {
             Logger.getLogger(Dados.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
@@ -101,7 +102,7 @@ public class Dados {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        
+        int count = 0;
         List<Anime> animes = new ArrayList<>();
         
         try {
@@ -111,14 +112,14 @@ public class Dados {
             
             while(rs.next()){
                 Anime a = new Anime(); 
-                
+                count++;
                 a.setNome(rs.getString("NOME"));
                 a.setGenero(rs.getString("GENERO"));
                 a.setNota(rs.getDouble("NOTA"));
                 a.setClassficacao(rs.getString("CLASSIFICACAO"));
                 animes.add(a);
             }
-            
+            JOptionPane.showMessageDialog(null, "Foram encontrados "+count+" Animes");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Gênero não encontrado!");
         }finally{
